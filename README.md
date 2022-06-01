@@ -1,4 +1,4 @@
-# Node-JS Boilerplate
+# Servent App Backend
 
 Installation steps to run server locally
 
