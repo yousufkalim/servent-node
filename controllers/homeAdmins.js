@@ -3,6 +3,7 @@
  * @author Yousuf Kalim
  */
 const HomeAdmins = require("../models/HomeAdmins");
+const Homes = require("../models/Homes");
 const Staff = require("../models/Servants");
 const OTPs = require("../models/OTPs");
 const bcrypt = require("bcryptjs");
@@ -129,7 +130,7 @@ exports.delete = async (req, res) => {
  */
 exports.createStaff = async (req, res) => {
   try {
-    let { email, homeAdminId } = req.body; // Getting required fields from body
+    let { email, adminId } = req.body; // Getting required fields from body
     const existingAdmin = await HomeAdmins.findOne({ _id: homeAdminId }); // Finding already existing user
     if (!existingAdmin) {
       return res
@@ -157,6 +158,62 @@ exports.createStaff = async (req, res) => {
         success: true,
         message: "Password successfully sent",
         staff,
+      });
+    });
+  } catch (err) {
+    // Error handling
+    console.log("Error ----> ", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+/**
+ * Create Member - Signup
+ * @param {object} req
+ * @param {object} res
+ */
+exports.createMember = async (req, res) => {
+  try {
+    let { email, adminId } = req.body; // Getting required fields from body
+    const existingAdmin = await HomeAdmins.findOne({ _id: adminId }); // Finding already existing user
+    if (!existingAdmin) {
+      return res
+        .status(409)
+        .json({ success: false, message: "Home Admin Not found" });
+    }
+    const findHome = await Homes.findById(existingAdmin?.home);
+    if (!findHome) {
+      return res
+        .status(409)
+        .json({ success: false, message: "Home Not Created Yet" });
+    }
+    const existingMemeber = await HomeAdmins.findOne({ email }); // Finding already existing user
+    // Extra Validations
+    if (existingMemeber) {
+      // If we found existing user in db
+      return res
+        .status(409)
+        .json({ success: false, message: "Member already exists." });
+    }
+    let password = Math.random().toString(36).slice(-8); //generate otp of client
+    sendPassword(email, password).then(async () => {
+      // If email is sent then we have to update the otp n password in db
+      req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt)); // Hashing the password with salt 8
+      const member = await HomeAdmins.create(req.body); // Adding user in db
+      findHome.members.push(member._id);
+      member.home = findHome._id;
+      if (existingAdmin.servants) {
+        member.servants.push(existingAdmin.servants);
+        await member.save();
+      }
+      await findHome.save();
+      await member.save();
+      await existingAdmin.save();
+      // Done
+      return res.json({
+        success: true,
+        message: "Password successfully sent",
+        member,
       });
     });
   } catch (err) {

@@ -22,6 +22,15 @@ exports.validateUser = [
     .isLength({ min: 8 }),
 ];
 
+exports.validateMember = [
+  check("name", "Name is required.").notEmpty().trim(),
+  check("email", "Email is required.").notEmpty().isEmail().trim(),
+  check("role", "Role is not correct member").isIn(["member"]),
+  check("age", "age is required").notEmpty().trim(),
+  check("relation", "relation is required").notEmpty().trim(),
+  check("adminId", "adminId is required").notEmpty().trim(),
+];
+
 // User Signup Validation
 exports.validateUserUpdate = [
   check("name", "Name is required.").notEmpty().trim(),
@@ -88,9 +97,50 @@ exports.validateHome = [
 ];
 
 exports.validateServant = [
-  check("phone", "phone is required.").notEmpty().trim(),
+  check("phone_number", "phone_number is required.").notEmpty().trim(),
   check("email", "email is required.").notEmpty().trim(),
   check("name", "name is  required").notEmpty().trim(),
+];
+
+exports.validateTask = [
+  check("title", "title is required.").notEmpty().trim(),
+  check("description", "description is required.").notEmpty().trim(),
+  check("type", "type is required.").notEmpty().trim(),
+  check("home", "homeId is required.").notEmpty().trim(),
+  check("servant", "servantId is required.").notEmpty().trim(),
+  check("deadline_date", "deadline_date is  required").notEmpty().trim(),
+];
+exports.validateStatusTask = [
+  check("servantId", "servantId is required.").notEmpty().trim(),
+  check("taskId", "taskId is required.").notEmpty().trim(),
+  check(
+    "status",
+    "status is not correct accpeted/rejected/completed/in_progress"
+  ).isIn(["accepted", "rejected", "in_progress", "completed"]),
+];
+exports.validateStatus = [
+  check(
+    "status",
+    "status is not correct accpeted/rejected/completed/in_progress"
+  ).isIn(["accepted", "pending", "in_progress", "completed"]),
+];
+
+exports.validateUnavailabillity = [
+  check("type", "type is required.").notEmpty().trim(),
+  check("reason", "reason is required.").notEmpty().trim(),
+  check("servant", "servantId is required.").notEmpty().trim(),
+  check("start_date", "start_date is required.").notEmpty().trim(),
+  check("end_date", "end_date is required.").notEmpty().trim(),
+];
+exports.validateStatusUnavailabillity = [
+  check("servantId", "servantId is required.").notEmpty().trim(),
+  check("unavailabillityId", "unavailabillityId is required.")
+    .notEmpty()
+    .trim(),
+  check("status", "status is not correct accpeted/rejected").isIn([
+    "accepted",
+    "rejected",
+  ]),
 ];
 /*
 ======================

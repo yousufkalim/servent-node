@@ -28,10 +28,12 @@ const homesSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "servants",
     },
-    tasks: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "tasks",
-    },
+    tasks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tasks",
+      },
+    ],
   },
   {
     timestamps: true,

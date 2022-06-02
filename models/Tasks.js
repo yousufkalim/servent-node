@@ -10,19 +10,22 @@ const tasksSchema = new mongoose.Schema(
     title: String,
     type: String,
     description: String,
-    date: {
-      start_time: Date,
-      end_time: Date,
-    },
+    deadline_date: Date,
+    photo: String,
     receipt_image: String,
     submission_detail: String,
     status: {
       type: String,
-      enum: ["accepted", "pending", "in_progress", "completed"],
+      enum: ["accepted", "pending", "in_progress", "rejected", "completed"],
+      default: "pending",
     },
     home_admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "home_admins",
+    },
+    home: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "homes",
     },
     servant: {
       type: mongoose.Schema.Types.ObjectId,

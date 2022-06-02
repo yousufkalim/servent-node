@@ -20,12 +20,6 @@ const servantSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "homes",
     },
-    notifications: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "notifications",
-      },
-    ],
     tasks: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,8 +34,7 @@ const servantSchema = new mongoose.Schema(
     ],
     email: String,
     category: String,
-    cnic: String,
-    picture: String,
+    photo: String,
     password: String,
     age: Number,
   },

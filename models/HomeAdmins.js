@@ -24,9 +24,10 @@ const home_adminSchema = new mongoose.Schema(
     },
     phone_number: Number,
     dob: Date,
+
     role: {
       type: String,
-      enum: ["admin", "family_member"],
+      enum: ["admin", "member"],
       default: "admin",
     },
     home: {

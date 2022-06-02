@@ -21,7 +21,6 @@ exports.loginHomeAdmin = async (req, res) => {
     // Getting email and password
     const { email, password } = req.body;
     const userOtp = await OTPs.findOne({ email });
-
     if (!userOtp?.is_verified) {
       // If user not found
       return res
@@ -36,6 +35,13 @@ exports.loginHomeAdmin = async (req, res) => {
         .status(404)
         .json({ success: false, message: "User not found" });
     }
+    if (!user) {
+      // If user not found
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
     // Comparing password
     const isMatched = bcrypt.compareSync(password, user.password);
 
@@ -55,6 +61,56 @@ exports.loginHomeAdmin = async (req, res) => {
 
       // done
       res.json({ success: true, homeAdmin: user, token });
+    });
+  } catch (err) {
+    // Error handling
+    console.log("Error ----> ", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+/**
+ * Login Home Admin
+ * @param {object} req
+ * @param {object} res
+ */
+exports.loginMember = async (req, res) => {
+  try {
+    // Getting email and password
+    const { email, password } = req.body;
+    const user = await Users.findOne({ email });
+    if (!user) {
+      // If user not found
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+    if (!user) {
+      // If user not found
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Comparing password
+    const isMatched = bcrypt.compareSync(password, user.password);
+
+    if (!isMatched) {
+      // If password not matched
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid Password" });
+    }
+
+    // Creating payload with user object
+    const payload = { user };
+
+    // Generating token
+    jwt.sign(payload, tokenSecret, { expiresIn: 360000 }, (err, token) => {
+      if (err) throw err;
+
+      // done
+      res.json({ success: true, member: user, token });
     });
   } catch (err) {
     // Error handling

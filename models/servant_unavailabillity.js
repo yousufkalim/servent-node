@@ -7,19 +7,14 @@ const mongoose = require("mongoose");
 // Schema
 const unavailabilitySchema = new mongoose.Schema(
   {
-    date: {
-      start_date: Date,
-      end_date: Date,
-    },
-    title: String,
+    start_date: Date,
+    end_date: Date,
+    type: String,
     reason: String,
     status: {
       type: String,
-      enum: ["accepted", "pending"],
-    },
-    home: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "homes",
+      enum: ["accepted", "pending", "rejected"],
+      default: "pending",
     },
     servant: {
       type: mongoose.Schema.Types.ObjectId,

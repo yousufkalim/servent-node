@@ -1,6 +1,6 @@
 /**
  * Home CRUD controllers
- * @author Yousuf Kalim
+ * @author Shuja Naqvi
  */
 const Homes = require("../models/Homes");
 const HomeAdmins = require("../models/HomeAdmins");
@@ -43,7 +43,7 @@ exports.create = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
-    const homes = await Homes.find().populate("home_admin"); // Finding all the Homes from db
+    const homes = await Homes.find().populate("home_admin").populate("tasks"); // Finding all the Homes from db
     res.json({ success: true, homes }); // Success
   } catch (err) {
     // Error handling
@@ -60,7 +60,9 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const homeId = req.params.homeId; // Getting home id from URL parameter
-    const home = await Homes.findById(homeId).populate("home_admin"); // Finding home by id
+    const home = await Homes.findById(homeId)
+      .populate("home_admin")
+      .populate("tasks"); // Finding home by id
     res.json({ success: true, home }); // Success
   } catch (err) {
     // Error handling

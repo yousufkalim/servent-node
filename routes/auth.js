@@ -20,8 +20,11 @@ const {
  */
 
 // Read
-router.post("/loginHomeAdmin", validateLogin, isValidated, auth.loginHomeAdmin); // Get all users at once
-router.post("/loginStaff", validateLogin, isValidated, auth.loginStaff); // Get all users at once
+//login
+router.post("/loginHomeAdmin", validateLogin, isValidated, auth.loginHomeAdmin);
+router.post("/loginStaff", validateLogin, isValidated, auth.loginStaff);
+//loginMember
+router.post("/loginMember", validateLogin, isValidated, auth.loginMember);
 router.put(
   "/changePasswordHomeAdmin/:userId",
   changePasswordValidate,

@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const servant = require("../controllers/homes");
+const servant = require("../controllers/servants");
 const { upload } = require("../middleware/multer");
 const { validateServant, isValidated } = require("../middleware/validators");
 /**
  * ////////////////////////// Routes /////////////////////////
- * @method post Home Create
- * @method get get Home By Id
- * @method put update Home
+ * @method post Servant Create
+ * @method get get Servant By Id
+ * @method put update Servant
  */
 
 router.get("/", servant.getAll);

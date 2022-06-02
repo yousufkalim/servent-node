@@ -22,7 +22,6 @@ exports.checkHomeAdminAuth = (req, res, next) => {
     // Decrypting token
     const token = header.split(" ")[1];
     const decoded = jwt.verify(token, tokenSecret);
-    return console.log(decoded);
     req.user = decoded.user;
     req.token = token;
 

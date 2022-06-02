@@ -7,6 +7,7 @@ const users = require("../controllers/homeAdmins");
 const {
   validateUser,
   validateUserUpdate,
+  validateMember,
   validatStaff,
   isValidated,
 } = require("../middleware/validators");
@@ -35,5 +36,8 @@ router.delete("/:userId", users.delete); // delete a specific user by it's id
 
 //
 router.post("/createStaff", validatStaff, isValidated, users.createStaff);
+//createMember
+router.post("/createMember", validateMember, isValidated, users.createMember);
+
 // Export
 module.exports = router;
