@@ -43,7 +43,10 @@ exports.create = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
-    const homes = await Homes.find().populate("home_admin").populate("tasks"); // Finding all the Homes from db
+    const homes = await Homes.find()
+      .populate("home_admin")
+      .populate("tasks")
+      .populate("members"); // Finding all the Homes from db
     res.json({ success: true, homes }); // Success
   } catch (err) {
     // Error handling
@@ -62,7 +65,8 @@ exports.getById = async (req, res) => {
     const homeId = req.params.homeId; // Getting home id from URL parameter
     const home = await Homes.findById(homeId)
       .populate("home_admin")
-      .populate("tasks"); // Finding home by id
+      .populate("tasks")
+      .populate("members"); // Finding home by id
     res.json({ success: true, home }); // Success
   } catch (err) {
     // Error handling

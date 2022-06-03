@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Home = require("../controllers/homes");
+const Home = require("../controllers/Homes");
 const { upload } = require("../middleware/multer");
 const { validateHome, isValidated } = require("../middleware/validators");
 /**

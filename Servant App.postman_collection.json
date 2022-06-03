@@ -1,0 +1,1490 @@
+{
+	"info": {
+		"_postman_id": "c50affb0-b29a-4309-bb5b-c7eb76a897af",
+		"name": "Servant App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13373609"
+	},
+	"item": [
+		{
+			"name": "Home Admin",
+			"item": [
+				{
+					"name": "Create Home Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"shuja\",\"email\":\"shujanaqvi@falconit.com.pk\",\"role\":\"admin\",\"password\":\"123456789\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all House Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get House Admin By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/62973a75e05cd041b8f6e814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								"62973a75e05cd041b8f6e814"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Home Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"shuja naqvi\",\"email\":\"shuja@gmail.com\",\"phone_number\":\"03127378945\",\"role\":\"admin\",\"dob\":\"1998/12/31\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/62973a75e05cd041b8f6e814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								"62973a75e05cd041b8f6e814"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "otp",
+			"item": [
+				{
+					"name": "create otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"shujanaqvi@falconit.com.pk\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/otps/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"otps",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify otp",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"shujanaqvi@falconit.co.pk\",\"code\":363333}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/otps/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"otps",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "loginHomeAdmin",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "change Password Home Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"oldPassword\":\"1234567890\",\"newPassword\":\"12345678\",\"confirmPassword\":\"12345678\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/changePasswordHomeAdmin/62973a75e05cd041b8f6e814",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"changePasswordHomeAdmin",
+								"62973a75e05cd041b8f6e814"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgetPasswordAdmin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\":\"12345678\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/forgotHomeAdminPassword/shujanaqvi@falconit.com.pk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"forgotHomeAdminPassword",
+								"shujanaqvi@falconit.com.pk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Staff",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"shujanaqvi288@gmail.com\",\"password\":\"363z4mn6\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/loginStaff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"loginStaff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change Passwword Servant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"oldPassword\":\"363z4mn6\",\"newPassword\":\"12345678\",\"confirmPassword\":\"12345678\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth//changeStaffPassword/62975a14351ecc49020f208f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"",
+								"changeStaffPassword",
+								"62975a14351ecc49020f208f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget Password Servant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\":\"12345678\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth//forgotHomeAdminPassword/shujanaqvi288@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"",
+								"forgotHomeAdminPassword",
+								"shujanaqvi288@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"wahaj587@gmail.com\",\"password\":\"uj06d9fu\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/loginMember",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"loginMember"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Create Staff",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InJvbGUiOiJhZG1pbiIsInNlcnZhbnRzIjpbXSwiX2lkIjoiNjI5NzNhNzVlMDVjZDA0MWI4ZjZlODE0IiwibmFtZSI6InNodWphIiwiZW1haWwiOiJzaHVqYW5hcXZpQGZhbGNvbml0LmNvbS5wayIsInBhc3N3b3JkIjoiJDJhJDEwJHNCTmV5VXRXRjJRRW5vUzV0djlFZi5hUk9Pa283TmF3dEFIMkowM0Z3MzhZZXouMU1yMjNXIiwiY3JlYXRlZEF0IjoiMjAyMi0wNi0wMVQxMDowNzo0OS4yNDRaIiwidXBkYXRlZEF0IjoiMjAyMi0wNi0wMVQxMDozOToyNC41MDFaIiwiX192IjowfSwiaWF0IjoxNjU0MDgwMDc0LCJleHAiOjE2NTQ0NDAwNzR9.3ou8kVAn1InuWVgMaDUaSE_j2VSxPE6putqG4-sF9Qg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"shuja naqvi\",\"email\":\"shujanaqvi288@gmail.com\",\"phone_number\":\"12345678\",\"age\":\"23\",\"category\":\"coder\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/createStaff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								"createStaff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/servants/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"servants",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Staff By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/servants/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"servants",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update servant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "phone_number",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "shujanaqvi288@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "coder12",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "22",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/falconitconsulting/Desktop/download.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/servants/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"servants",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "Create Home",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Homes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/homes/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Home By Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update Home",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "House #bb333",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "House",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/falconitconsulting/Desktop/download.png"
+								},
+								{
+									"key": "description",
+									"value": "jsdkjnsdjkcs",
+									"type": "text"
+								},
+								{
+									"key": "home_admin",
+									"value": "6297658b4265424d9d8d3a34",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/homes/62976db20646d4516558e72d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homes",
+								"62976db20646d4516558e72d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Add Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Two Steak Meal",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Xyz qwerty asdf",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Emergency",
+									"type": "text"
+								},
+								{
+									"key": "home",
+									"value": "62976db20646d4516558e72d",
+									"type": "text"
+								},
+								{
+									"key": "servant",
+									"value": "629767acc0232a4ecd0d4fb2",
+									"type": "text"
+								},
+								{
+									"key": "deadline_date",
+									"value": "2022/12/31",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get task by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/62984f116645f76308c5c096",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"62984f116645f76308c5c096"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Two Steak Meal",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Libero leo, enim, dui, neque pellentesque sit faucibus sagittis. Tincidunt tristique gravida et adipiscing. Risus id eget cras ipsum, porta.",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "chef",
+									"type": "text"
+								},
+								{
+									"key": "home",
+									"value": "62976db20646d4516558e72d",
+									"type": "text"
+								},
+								{
+									"key": "servant",
+									"value": "629767acc0232a4ecd0d4fb2",
+									"type": "text"
+								},
+								{
+									"key": "deadline_date",
+									"value": "2022/12/19",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/Users/falconitconsulting/Desktop/download.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/62984f116645f76308c5c096",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"62984f116645f76308c5c096"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servantId\":\"629767acc0232a4ecd0d4fb2\",\"taskId\":\"62984f116645f76308c5c096\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/acceptTask",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"acceptTask"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get tasks by servant id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/getByServantId/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"getByServantId",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task By Home Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/getByHomeId/62976db20646d4516558e72d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"getByHomeId",
+								"62976db20646d4516558e72d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task By Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"status\":\"in_progress\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/tasks/getByStatus/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tasks",
+								"getByStatus",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leave Managment",
+			"item": [
+				{
+					"name": "Leave Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"type\":\"Emergency\",\"reason\":\"lorum ispum........!\",\"servant\":\"629767acc0232a4ecd0d4fb2\",\"start_date\":\"2022/7/20\",\"end_date\":\"2022/7/23\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get leave by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/629864156f22ae6cda28571d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								"629864156f22ae6cda28571d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update leave request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"type\":\"wedding \",\"reason\":\"lorum ispum........!\",\"servant\":\"629767acc0232a4ecd0d4fb2\",\"start_date\":\"2022/7/20\",\"end_date\":\"2022/7/23\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/629864156f22ae6cda28571d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								"629864156f22ae6cda28571d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve or reject Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servantId\":\"629767acc0232a4ecd0d4fb2\",\"unavailabillityId\":\"629864156f22ae6cda28571d\",\"status\":\"accepted\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/changeStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								"changeStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get leaves of a servant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/unavailabillity/getByServant/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"unavailabillity",
+								"getByServant",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Create member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"wahaj\",\"email\":\"wahaj587@gmail.com\",\"role\":\"member\",\"age\":\"26\",\"relation\":\"brother\",\"adminId\":\"6297658b4265424d9d8d3a34\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/homeAdmins/createMember",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"homeAdmins",
+								"createMember"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/members/getByHomeId/62976db20646d4516558e72d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"members",
+								"getByHomeId",
+								"62976db20646d4516558e72d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/members/6298907a4241d57b18939377",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"members",
+								"6298907a4241d57b18939377"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "wahaj haider",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/members/6298907a4241d57b18939377",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"members",
+								"6298907a4241d57b18939377"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/members/6298a0d25ea97e826369bd47",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"members",
+								"6298a0d25ea97e826369bd47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Get notification of a servant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/getAllServant/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"getAllServant",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get notification of a home admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/getAllAdmin/6297658b4265424d9d8d3a34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"getAllAdmin",
+								"6297658b4265424d9d8d3a34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get notification by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/6299962ca4f76f8e4525a6c3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"6299962ca4f76f8e4525a6c3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete notification by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/6299962ca4f76f8e4525a6c3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"6299962ca4f76f8e4525a6c3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seen all notification of servant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/seenByServant/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"seenByServant",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seen All notification of admin Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/notifications/seenByAdmin/6297658b4265424d9d8d3a34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"notifications",
+								"seenByAdmin",
+								"6297658b4265424d9d8d3a34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PaymentHistory",
+			"item": [
+				{
+					"name": "AddPayment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servant\":\"629767acc0232a4ecd0d4fb2\",\"amount\":\"2300\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/paymenthistory/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"paymenthistory",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all payments of a servant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/paymenthistory/getByServant/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"paymenthistory",
+								"getByServant",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a payment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/paymenthistory/6299ab5e49a0a6974a2c8df3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"paymenthistory",
+								"6299ab5e49a0a6974a2c8df3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add balance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servant\":\"629767acc0232a4ecd0d4fb2\",\"total_balance\":\"2900\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/expenses/6299db371a409ea38419993d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"expenses",
+								"6299db371a409ea38419993d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "get expense of a servant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/expenses/getByServant/6299f60f7be563ad11586f5b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"expenses",
+								"getByServant",
+								"6299f60f7be563ad11586f5b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get expense by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/expenses/6299f60f7be563ad11586f5d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"expenses",
+								"6299f60f7be563ad11586f5d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add balance",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction by expense",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

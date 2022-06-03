@@ -25,7 +25,6 @@ server.listen(port, () => {
 });
 
 //Notification
-
 io.on("connection", (socket) => {
   try {
     console.log("Connected");

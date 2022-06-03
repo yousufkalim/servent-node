@@ -8,6 +8,14 @@ const mongoose = require("mongoose");
 const notificationSchema = new mongoose.Schema(
   {
     title: String,
+    seenAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    seenServant: {
+      type: Boolean,
+      default: false,
+    },
     home_admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "home_admins",

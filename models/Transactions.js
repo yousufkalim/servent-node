@@ -8,16 +8,14 @@ const mongoose = require("mongoose");
 const transactionSchema = new mongoose.Schema(
   {
     payment: Number,
+    expense: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "expenses",
+    },
     task: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "tasks",
     },
-    servants: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "servants",
-      },
-    ],
   },
   {
     timestamps: true,

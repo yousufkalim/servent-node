@@ -46,7 +46,7 @@ exports.validatStaff = [
   check("phone_number", "phone_number is required").notEmpty().trim(),
   check("age", "age is  required").notEmpty().trim(),
   check("category", "category is  required").notEmpty().trim(),
-  check("homeAdminId", "homeAdmin Id is  required").notEmpty().trim(),
+  check("adminId", "adminId  is  required").notEmpty().trim(),
 ];
 
 // Login validation
@@ -95,7 +95,20 @@ exports.validateHome = [
   check("description", "description is required.").notEmpty().trim(),
   check("home_admin", "homeAdmin Id is  required").notEmpty().trim(),
 ];
+exports.validatePayment = [
+  check("servant", "servantId is required.").notEmpty().trim(),
+  check("amount", "amount is required.").notEmpty().trim(),
+];
 
+exports.validateExpense = [
+  check("servant", "servantId is required.").notEmpty().trim(),
+  check("total_balance", "total_balance is required.").notEmpty().trim(),
+];
+exports.validateTransaction = [
+  check("payment", "payment is required.").notEmpty().trim(),
+  check("expense", "expenseId is required.").notEmpty().trim(),
+  check("task", "taskId is required.").notEmpty().trim(),
+];
 exports.validateServant = [
   check("phone_number", "phone_number is required.").notEmpty().trim(),
   check("email", "email is required.").notEmpty().trim(),

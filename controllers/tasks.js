@@ -176,7 +176,7 @@ exports.changeTask = async (req, res) => {
       await task.save();
       await servant.save();
       if (io.socket) {
-        io.socket.emit(`${servantId}Task Response`, {
+        io.socket.emit(`${task.home.home_admin}Task Response`, {
           message: `Task ${req.body.status}`,
         });
       }

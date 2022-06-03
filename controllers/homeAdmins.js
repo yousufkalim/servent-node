@@ -6,6 +6,7 @@ const HomeAdmins = require("../models/HomeAdmins");
 const Homes = require("../models/Homes");
 const Staff = require("../models/Servants");
 const OTPs = require("../models/OTPs");
+const Expenses = require("../models/Expenses");
 const bcrypt = require("bcryptjs");
 const bcryptSalt = process.env.BCRYPT_SALT || 10;
 const { sendPassword } = require("../utils/sendEmail");
@@ -131,7 +132,7 @@ exports.delete = async (req, res) => {
 exports.createStaff = async (req, res) => {
   try {
     let { email, adminId } = req.body; // Getting required fields from body
-    const existingAdmin = await HomeAdmins.findOne({ _id: homeAdminId }); // Finding already existing user
+    const existingAdmin = await HomeAdmins.findOne({ _id: adminId }); // Finding already existing user
     if (!existingAdmin) {
       return res
         .status(409)
@@ -151,8 +152,7 @@ exports.createStaff = async (req, res) => {
       // If email is sent then we have to update the otp n password in db
       req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt)); // Hashing the password with salt 8
       const staff = await Staff.create(req.body); // Adding user in db
-      existingAdmin.servants.push(staff._id);
-      await existingAdmin.save();
+      await Expenses.create({ servant: staff._id });
       // Done
       return res.json({
         success: true,

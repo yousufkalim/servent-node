@@ -3,7 +3,6 @@
  * @author Shuja Naqvi
  */
 const Servants = require("../models/Servants");
-const HomeAdmins = require("../models/HomeAdmins");
 /**
  * Get all servants
  * @param {object} req
@@ -15,7 +14,6 @@ exports.getAll = async (req, res) => {
       .populate("home")
       .populate("tasks")
       .populate("unavailabillity");
-    //   .populate("notifications")
     // Finding all the Homes from db
     res.json({ success: true, servants }); // Success
   } catch (err) {
@@ -37,7 +35,6 @@ exports.getById = async (req, res) => {
       .populate("home")
       .populate("tasks")
       .populate("unavailabillity");
-    //   .populate("notifications")
     // Finding servant from db
     res.json({ success: true, servant }); // Success
   } catch (err) {

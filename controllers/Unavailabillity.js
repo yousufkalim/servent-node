@@ -124,26 +124,23 @@ exports.changeStatus = async (req, res) => {
   try {
     let { unavailabillityId, servantId } = req.body;
     const servant = await Servants.findById(servantId).populate("home");
-    if (servant?.unavailabillity == unavailabillityId) {
-      const unavailabillity = await Unavailabillity.findById(unavailabillityId);
-      unavailabillity.status = req.body.status;
-      await unavailabillity.save();
-      if (io.socket) {
-        io.socket.emit(`${servant._id}Leave Response`, {
-          message: `leave Request ${req.body.status}`,
-        });
-      }
-      await Notifications.create({
-        servant: servant._id,
-        title: `leave Request ${req.body.status}`,
-        home_admin: servant.home.home_admin,
+    const unavailabillity = await Unavailabillity.findById(unavailabillityId);
+    unavailabillity.status = req.body.status;
+    await unavailabillity.save();
+    if (io.socket) {
+      io.socket.emit(`${servantId}Leave Response`, {
+        message: `leave Request ${req.body.status}`,
       });
-      return res.json({
-        success: true,
-        message: "leave" + " " + req.body.status,
-      }); // Success
     }
-    res.json({ success: false, message: "invalid leave id" }); // Success
+    await Notifications.create({
+      servant: servant._id,
+      title: `leave Request ${req.body.status}`,
+      home_admin: servant.home.home_admin,
+    });
+    return res.json({
+      success: true,
+      message: "leave" + " " + req.body.status,
+    }); // Success
   } catch (err) {
     // Error handling
     console.log("Error ----> ", err);
