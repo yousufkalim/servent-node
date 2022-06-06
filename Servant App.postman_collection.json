@@ -1458,8 +1458,30 @@
 				{
 					"name": "Add balance",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servant\":\"6299f60f7be563ad11586f5b\",\"total_balance\":\"1400\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/expenses/6299f60f7be563ad11586f5d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"expenses",
+								"6299f60f7be563ad11586f5d"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1480,7 +1502,181 @@
 					"name": "Get Transaction by expense",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/transactions/getByExpense/6299f60f7be563ad11586f5d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"transactions",
+								"getByExpense",
+								"6299f60f7be563ad11586f5d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chats",
+			"item": [
+				{
+					"name": "Send Message By Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servant\":\"629767acc0232a4ecd0d4fb2\",\"home_admin\":\"6297658b4265424d9d8d3a34\",\"message\":\"Task Pora war...!\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/chats/msgByAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"msgByAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message By Servant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"servant\":\"629767acc0232a4ecd0d4fb2\",\"home_admin\":\"6297658b4265424d9d8d3a34\",\"message\":\"A rha hoon war...!\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/chats/msgByServant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"msgByServant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Msg By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/chats/629d9eddd03674dd88094b20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"629d9eddd03674dd88094b20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Servant Chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/chats/getServantChats/629767acc0232a4ecd0d4fb2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"getServantChats",
+								"629767acc0232a4ecd0d4fb2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get admin chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/chats/getAdminChats/6297658b4265424d9d8d3a34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"getAdminChats",
+								"6297658b4265424d9d8d3a34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seen Msg",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"chatId\":\"629d9eddd03674dd88094b20\",\"receiverId\":\"6297658b4265424d9d8d3a34\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/chats/readMsg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"chats",
+								"readMsg"
+							]
+						}
 					},
 					"response": []
 				}

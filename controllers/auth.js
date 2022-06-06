@@ -279,10 +279,9 @@ exports.forgotHomeAdminPassword = async (req, res) => {
         .json({ success: false, message: "Otp Not verified yet" });
     }
     // Getting user from db
-    req.body.password = bcrypt.hashSync(
-      req.body.password,
-      parseInt(bcryptSalt)
-    );
+    const password = Math.random().toString(36).substring(2, 10);
+    await sendPassword(email, password);
+    req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
     const user = await Users.findOneAndUpdate(email, req.body, {
       new: true,
     });
@@ -305,16 +304,15 @@ exports.forgotStaffPassword = async (req, res) => {
 
     let userotp = await OTPs.findOne({ email });
 
-    if (!userotp.is_verified) {
+    if (!userotp?.is_verified) {
       return res
         .status(404)
         .json({ success: false, message: "Otp Not verified yet" });
     }
     // Getting user from db
-    req.body.password = bcrypt.hashSync(
-      req.body.password,
-      parseInt(bcryptSalt)
-    );
+    const password = Math.random().toString(36).substring(2, 10);
+    await sendPassword(email, password);
+    req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
     const user = await Staff.findOneAndUpdate(email, req.body, {
       new: true,
     });

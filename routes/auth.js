@@ -40,12 +40,8 @@ router.put(
   auth.changeStaffPassword
 ); // Change password route
 
-router.put(
-  "/forgotHomeAdminPassword/:email",
-  ForgetPasswordValidate,
-  isValidated,
-  auth.forgotHomeAdminPassword
-); // Change password route
+router.put("/forgotHomeAdminPassword/:email", auth.forgotHomeAdminPassword); // Change password route
+router.put("/forgotStaffPassword/:email", auth.forgotStaffPassword); // Change password route
 
 // Export
 module.exports = router;
