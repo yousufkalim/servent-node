@@ -18,6 +18,6 @@ router.use("/notifications", require("./Notifications")); // All the user routes
 router.use("/paymenthistory", require("./PayHistory")); // All the user routes
 router.use("/expenses", require("./expenses")); // All the user routes
 router.use("/transactions", require("./transactions")); // All the user routes
-
+router.use("/chats", require("./chats")); // All the user routes
 // Export
 module.exports = router;

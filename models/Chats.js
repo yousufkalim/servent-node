@@ -7,24 +7,30 @@ const mongoose = require("mongoose");
 // Schema
 const chatSchema = new mongoose.Schema(
   {
-    users: [
+    home_admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "home_admins",
+    },
+    servant: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "servants",
+    },
+    message: [
       {
-        home_admin: {
+        sender: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "home_admins",
         },
-        servants: {
+        receiver: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "servants",
+        },
+        message: String,
+        status: {
+          type: String,
+          default: "un_seen",
+          enum: ["seen", "un_seen"],
         },
       },
     ],
-    message: {
-      sender: String,
-      receiver: String,
-      message: String,
-      status: ["seen", "un_seen"],
-    },
   },
   {
     timestamps: true,

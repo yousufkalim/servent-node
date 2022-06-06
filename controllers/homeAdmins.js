@@ -7,6 +7,7 @@ const Homes = require("../models/Homes");
 const Staff = require("../models/Servants");
 const OTPs = require("../models/OTPs");
 const Expenses = require("../models/Expenses");
+const Chats = require("../models/Chats");
 const bcrypt = require("bcryptjs");
 const bcryptSalt = process.env.BCRYPT_SALT || 10;
 const { sendPassword } = require("../utils/sendEmail");
@@ -139,7 +140,6 @@ exports.createStaff = async (req, res) => {
         .json({ success: false, message: "Home Admin Not found" });
     }
     const existingUser = await Staff.findOne({ email }); // Finding already existing user
-
     // Extra Validations
     if (existingUser) {
       // If we found existing user in db

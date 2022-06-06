@@ -48,7 +48,19 @@ exports.validatStaff = [
   check("category", "category is  required").notEmpty().trim(),
   check("adminId", "adminId  is  required").notEmpty().trim(),
 ];
-
+//validateChat
+exports.validateChat = [
+  check("servant", "servantId is required").notEmpty().trim(),
+  check("home_admin", "HomeAdmin Id is required.").notEmpty().trim(),
+  check("message", "message is required").notEmpty().trim(),
+];
+//validateChat
+exports.validateGetServantChat = [
+  check("servant", "servant Id is required.").notEmpty().trim(),
+];
+exports.validateGetAdminChat = [
+  check("home_admin", "HomeAdmin Id is required.").notEmpty().trim(),
+];
 // Login validation
 exports.validateLogin = [
   check("email", "Email is required").notEmpty().isEmail().trim().toLowerCase(),
