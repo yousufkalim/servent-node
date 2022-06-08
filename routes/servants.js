@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const servant = require("../controllers/Servants");
+const servant = require("../controllers/servants");
 const { upload } = require("../middleware/multer");
 const { validateServant, isValidated } = require("../middleware/validators");
 /**
