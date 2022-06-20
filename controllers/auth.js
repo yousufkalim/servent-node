@@ -128,13 +128,6 @@ exports.loginStaff = async (req, res) => {
   try {
     // Getting email and password
     const { email, password } = req.body;
-    const userOtp = await OTPs.findOne({ email });
-    if (!userOtp?.is_verified) {
-      // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not verified" });
-    }
     // Getting user from db
     const user = await Staff.findOne({ email });
     if (!user) {
