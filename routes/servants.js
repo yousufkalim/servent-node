@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const servant = require("../controllers/servants");
 const { upload } = require("../middleware/multer");
-const { validateServant, isValidated } = require("../middleware/validators");
+const {
+  validateServant,
+  getByHomeId,
+  isValidated,
+} = require("../middleware/validators");
 /**
  * ////////////////////////// Routes /////////////////////////
  * @method post Servant Create
@@ -10,6 +14,7 @@ const { validateServant, isValidated } = require("../middleware/validators");
  */
 
 router.get("/", servant.getAll);
+router.post("/getByHomeId", getByHomeId, isValidated, servant.getByHomeId);
 router.get("/:servantId", servant.getById);
 router.put(
   "/:servantId",
