@@ -25,6 +25,25 @@ exports.getAll = async (req, res) => {
 };
 
 /**
+ * Get all servants
+ * @param {object} req
+ * @param {object} res
+ */
+exports.getByHomeId = async (req, res) => {
+  try {
+    const servants = await Servants.find({ home: req.body.homeId })
+      .populate("home")
+      .populate("tasks")
+      .populate("unavailabillity");
+    // Finding all the Homes from db
+    res.json({ success: true, servants }); // Success
+  } catch (err) {
+    // Error handling
+    console.log("Error ----> ", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+/**
  * Get home by id
  * @param {object} req
  * @param {object} res

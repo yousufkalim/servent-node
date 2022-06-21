@@ -15,6 +15,11 @@ const servantSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      default: "servant",
+      enum: ["servant"],
+    },
     dob: Date,
     home: {
       type: mongoose.Schema.Types.ObjectId,
@@ -29,7 +34,7 @@ const servantSchema = new mongoose.Schema(
     unavailabillity: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "unavailabillity",
+        ref: "servantunavailabillity",
       },
     ],
     email: String,

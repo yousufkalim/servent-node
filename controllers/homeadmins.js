@@ -54,7 +54,7 @@ exports.create = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
-    const users = await HomeAdmins.find(); // Finding all the users from db
+    const users = await HomeAdmins.find().populate("servants"); // Finding all the users from db
     res.json({ success: true, users }); // Success
   } catch (err) {
     // Error handling
@@ -71,7 +71,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const userId = req.params.userId; // Getting user id from URL parameter
-    const user = await HomeAdmins.findById(userId); // Finding user by id
+    const user = await HomeAdmins.findById(userId).populate("servants"); // Finding user by id
     res.json({ success: true, user }); // Success
   } catch (err) {
     // Error handling
@@ -147,11 +147,19 @@ exports.createStaff = async (req, res) => {
         .status(409)
         .json({ success: false, message: "User already exists." });
     }
+    const findHome = await Homes.findById(existingAdmin?.home);
+    if (!findHome) {
+      return res
+        .status(409)
+        .json({ success: false, message: "Home Not Created Yet" });
+    }
     let password = Math.random().toString(36).slice(-8); //generate otp of client
     sendPassword(email, password).then(async () => {
       // If email is sent then we have to update the otp n password in db
       req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt)); // Hashing the password with salt 8
       const staff = await Staff.create(req.body); // Adding user in db
+      findHome.servants.push(staff._id);
+      await findHome.save();
       await Expenses.create({ servant: staff._id });
       // Done
       return res.json({

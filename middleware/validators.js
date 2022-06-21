@@ -47,7 +47,10 @@ exports.validatStaff = [
   check("age", "age is  required").notEmpty().trim(),
   check("category", "category is  required").notEmpty().trim(),
   check("adminId", "adminId  is  required").notEmpty().trim(),
+  check("home", "homeId  is  required").notEmpty().trim(),
 ];
+// Staff Signup Validation
+exports.getByHomeId = [check("home", "homeId  is  required").notEmpty().trim()];
 //validateChat
 exports.validateChat = [
   check("servant", "servantId is required").notEmpty().trim(),
