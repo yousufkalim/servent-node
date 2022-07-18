@@ -2,15 +2,15 @@
  * User CRUD controllers
  * @author Yousuf Kalim
  */
-const HomeAdmins = require("../models/HomeAdmins");
-const Homes = require("../models/Homes");
-const Staff = require("../models/Servants");
-const OTPs = require("../models/Otps");
-const Expenses = require("../models/Expenses");
-const Chats = require("../models/Chats");
-const bcrypt = require("bcryptjs");
+const HomeAdmins = require('../models/HomeAdmins');
+const Homes = require('../models/Homes');
+const Staff = require('../models/Servants');
+const OTPs = require('../models/Otps');
+const Expenses = require('../models/Expenses');
+const Chats = require('../models/Chats');
+const bcrypt = require('bcryptjs');
 const bcryptSalt = process.env.BCRYPT_SALT || 10;
-const { sendPassword } = require("../utils/sendEmail");
+const { sendPassword } = require('../utils/sendEmail');
 //
 /**
  * Create User - Signup
@@ -25,14 +25,10 @@ exports.create = async (req, res) => {
     // Extra Validations
     if (existingUser) {
       // If we found existing user in db
-      return res
-        .status(409)
-        .json({ success: false, message: "User already exists." });
+      return res.status(409).json({ success: false, message: 'User already exists.' });
     }
     if (!userOtp?.is_verified) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Account is not verified yet" });
+      return res.status(404).json({ success: false, message: 'Account is not verified yet' });
     }
     // Creating User
     req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt)); // Hashing the password with salt 8
@@ -42,8 +38,8 @@ exports.create = async (req, res) => {
     res.json({ success: true, user }); //Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -54,12 +50,12 @@ exports.create = async (req, res) => {
  */
 exports.getAll = async (req, res) => {
   try {
-    const users = await HomeAdmins.find().populate("servants"); // Finding all the users from db
+    const users = await HomeAdmins.find().populate('servants'); // Finding all the users from db
     res.json({ success: true, users }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -71,12 +67,12 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const userId = req.params.userId; // Getting user id from URL parameter
-    const user = await HomeAdmins.findById(userId).populate("servants"); // Finding user by id
+    const user = await HomeAdmins.findById(userId).populate('servants'); // Finding user by id
     res.json({ success: true, user }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -91,10 +87,7 @@ exports.update = async (req, res) => {
 
     // If user want to update it's password
     if (req.body.password) {
-      req.body.password = bcrypt.hashSync(
-        req.body.password,
-        parseInt(bcryptSalt)
-      );
+      req.body.password = bcrypt.hashSync(req.body.password, parseInt(bcryptSalt));
     }
 
     const user = await HomeAdmins.findByIdAndUpdate(userId, req.body, {
@@ -103,8 +96,8 @@ exports.update = async (req, res) => {
     res.json({ success: true, user }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -120,8 +113,8 @@ exports.delete = async (req, res) => {
     res.json({ success: true, user }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -135,23 +128,17 @@ exports.createStaff = async (req, res) => {
     let { email, adminId } = req.body; // Getting required fields from body
     const existingAdmin = await HomeAdmins.findOne({ _id: adminId }); // Finding already existing user
     if (!existingAdmin) {
-      return res
-        .status(409)
-        .json({ success: false, message: "Home Admin Not found" });
+      return res.status(409).json({ success: false, message: 'Home Admin Not found' });
     }
     const existingUser = await Staff.findOne({ email }); // Finding already existing user
     // Extra Validations
     if (existingUser) {
       // If we found existing user in db
-      return res
-        .status(409)
-        .json({ success: false, message: "User already exists." });
+      return res.status(409).json({ success: false, message: 'User already exists.' });
     }
     const findHome = await Homes.findById(existingAdmin?.home);
     if (!findHome) {
-      return res
-        .status(409)
-        .json({ success: false, message: "Home Not Created Yet" });
+      return res.status(409).json({ success: false, message: 'Home Not Created Yet' });
     }
     let password = Math.random().toString(36).slice(-8); //generate otp of client
     sendPassword(email, password).then(async () => {
@@ -164,14 +151,14 @@ exports.createStaff = async (req, res) => {
       // Done
       return res.json({
         success: true,
-        message: "Password successfully sent",
+        message: 'Password successfully sent',
         staff,
       });
     });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -185,23 +172,17 @@ exports.createMember = async (req, res) => {
     let { email, adminId } = req.body; // Getting required fields from body
     const existingAdmin = await HomeAdmins.findOne({ _id: adminId }); // Finding already existing user
     if (!existingAdmin) {
-      return res
-        .status(409)
-        .json({ success: false, message: "Home Admin Not found" });
+      return res.status(409).json({ success: false, message: 'Home Admin Not found' });
     }
     const findHome = await Homes.findById(existingAdmin?.home);
     if (!findHome) {
-      return res
-        .status(409)
-        .json({ success: false, message: "Home Not Created Yet" });
+      return res.status(409).json({ success: false, message: 'Home Not Created Yet' });
     }
     const existingMemeber = await HomeAdmins.findOne({ email }); // Finding already existing user
     // Extra Validations
     if (existingMemeber) {
       // If we found existing user in db
-      return res
-        .status(409)
-        .json({ success: false, message: "Member already exists." });
+      return res.status(409).json({ success: false, message: 'Member already exists.' });
     }
     let password = Math.random().toString(36).slice(-8); //generate otp of client
     sendPassword(email, password).then(async () => {
@@ -220,13 +201,13 @@ exports.createMember = async (req, res) => {
       // Done
       return res.json({
         success: true,
-        message: "Password successfully sent",
+        message: 'Password successfully sent',
         member,
       });
     });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };

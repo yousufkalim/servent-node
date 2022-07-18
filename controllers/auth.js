@@ -2,12 +2,12 @@
  * User auth controllers
  * @author Yousuf Kalim
  */
-const Users = require("../models/HomeAdmins");
-const Staff = require("../models/Servants");
-const OTPs = require("../models/Otps");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { sendPassword } = require("../utils/sendEmail");
+const Users = require('../models/HomeAdmins');
+const Staff = require('../models/Servants');
+const OTPs = require('../models/Otps');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { sendOTP } = require('../utils/sendEmail');
 const bcryptSalt = process.env.BCRYPT_SALT || 10;
 const tokenSecret = process.env.JWT_SECRET;
 //
@@ -23,23 +23,17 @@ exports.loginHomeAdmin = async (req, res) => {
     const userOtp = await OTPs.findOne({ email });
     if (!userOtp?.is_verified) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not verified" });
+      return res.status(404).json({ success: false, message: 'User not verified' });
     }
     // Getting user from db
     const user = await Users.findOne({ email });
     if (!user) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
     if (!user) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
     // Comparing password
@@ -47,9 +41,7 @@ exports.loginHomeAdmin = async (req, res) => {
 
     if (!isMatched) {
       // If password not matched
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid Password" });
+      return res.status(400).json({ success: false, message: 'Invalid Password' });
     }
 
     // Creating payload with user object
@@ -64,8 +56,8 @@ exports.loginHomeAdmin = async (req, res) => {
     });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -81,15 +73,11 @@ exports.loginMember = async (req, res) => {
     const user = await Users.findOne({ email });
     if (!user) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
     if (!user) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
     // Comparing password
@@ -97,9 +85,7 @@ exports.loginMember = async (req, res) => {
 
     if (!isMatched) {
       // If password not matched
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid Password" });
+      return res.status(400).json({ success: false, message: 'Invalid Password' });
     }
 
     // Creating payload with user object
@@ -114,8 +100,8 @@ exports.loginMember = async (req, res) => {
     });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -132,18 +118,14 @@ exports.loginStaff = async (req, res) => {
     const user = await Staff.findOne({ email });
     if (!user) {
       // If user not found
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
     // Comparing password
     const isMatched = bcrypt.compareSync(password, user.password);
 
     if (!isMatched) {
       // If password not matched
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid Password" });
+      return res.status(400).json({ success: false, message: 'Invalid Password' });
     }
 
     // Creating payload with user object
@@ -158,8 +140,8 @@ exports.loginStaff = async (req, res) => {
     });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -176,24 +158,20 @@ exports.changePasswordHomeAdmin = async (req, res) => {
     if (newPassword !== confirmPassword) {
       return res.status(400).json({
         success: false,
-        message: "New password and confirm password are not same",
+        message: 'New password and confirm password are not same',
       });
     }
 
     let user = await Users.findById(userId);
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
     const isMatched = bcrypt.compareSync(oldPassword, user.password);
 
     if (!isMatched) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid old Password" });
+      return res.status(400).json({ success: false, message: 'Invalid old Password' });
     }
 
     // Generate token
@@ -204,8 +182,8 @@ exports.changePasswordHomeAdmin = async (req, res) => {
     res.json({ success: true, user });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -222,24 +200,20 @@ exports.changeStaffPassword = async (req, res) => {
     if (newPassword !== confirmPassword) {
       return res.status(400).json({
         success: false,
-        message: "New password and confirm password are not same",
+        message: 'New password and confirm password are not same',
       });
     }
 
     let user = await Staff.findById(userId);
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
     const isMatched = bcrypt.compareSync(oldPassword, user.password);
 
     if (!isMatched) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid old Password" });
+      return res.status(400).json({ success: false, message: 'Invalid old Password' });
     }
 
     // Generate token
@@ -250,8 +224,8 @@ exports.changeStaffPassword = async (req, res) => {
     res.json({ success: true, user });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -267,22 +241,24 @@ exports.forgotHomeAdminPassword = async (req, res) => {
     let userotp = await OTPs.findOne({ email });
 
     if (!userotp?.is_verified) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Otp Not verified yet" });
+      return res.status(404).json({ success: false, message: 'Otp Not verified yet' });
     }
-    // Getting user from db
-    const password = Math.random().toString(36).substring(2, 10);
-    await sendPassword(email, password);
-    req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
-    const user = await Users.findOneAndUpdate(email, req.body, {
+    req.body.otp = Math.floor(100000 + Math.random() * 900000);
+    req.body.is_verified = false;
+    await sendOTP(email, req.body.otp);
+    let otp = await OTPs.findOneAndUpdate({ email }, req.body, {
+      upsert: true,
       new: true,
     });
-    res.json({ success: true, message: "Password Updated Successfully", user });
+    return res.json({
+      success: true,
+      message: 'OTP sent',
+      otp: otp,
+    });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -298,22 +274,55 @@ exports.forgotStaffPassword = async (req, res) => {
     let userotp = await OTPs.findOne({ email });
 
     if (!userotp?.is_verified) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Otp Not verified yet" });
+      return res.status(404).json({ success: false, message: 'Otp Not verified yet' });
     }
-    // Getting user from db
-    const password = Math.random().toString(36).substring(2, 10);
-    await sendPassword(email, password);
-    req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
-    const user = await Staff.findOneAndUpdate(email, req.body, {
+    req.body.otp = Math.floor(100000 + Math.random() * 900000);
+    req.body.is_verified = false;
+    await sendOTP(email, req.body.otp);
+    let otp = await OTPs.findOneAndUpdate({ email }, req.body, {
+      upsert: true,
       new: true,
     });
-    res.json({ success: true, message: "Password Updated Successfully", user });
+    return res.json({
+      success: true,
+      message: 'OTP sent',
+      otp: otp,
+    });
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+/**
+ * Confirm auth
+ * @param {object} req
+ * @param {object} res
+ */
+exports.updatePassword = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const { password } = req.body;
+    let userotp = await OTPs.findOne({ email });
+    let staff = await Staff.findOne({ email: email });
+    let homeAdmin = await Users.findOne({ email: email });
+    req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
+    if (staff) {
+      staff.password = req.body.password;
+      await staff.save();
+      return res.json({ success: true, staff: staff });
+    }
+    if (homeAdmin) {
+      homeAdmin.password = req.body.password;
+      await homeAdmin.save();
+      return res.json({ success: true, Admin: homeAdmin });
+    }
+    res.json({ success: false, message: 'user not found' });
+  } catch (err) {
+    // Error handling
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
