@@ -3,7 +3,7 @@
  * @author Shuja Naqvi
  */
 //
-const Servants = require("../models/Servants");
+const Servants = require('../models/Servants');
 /**
  * Get all servants
  * @param {object} req
@@ -11,16 +11,13 @@ const Servants = require("../models/Servants");
  */
 exports.getAll = async (req, res) => {
   try {
-    const servants = await Servants.find()
-      .populate("home")
-      .populate("tasks")
-      .populate("unavailabillity");
+    const servants = await Servants.find().populate('home').populate('tasks').populate('unavailabillity');
     // Finding all the Homes from db
     res.json({ success: true, servants }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -32,15 +29,15 @@ exports.getAll = async (req, res) => {
 exports.getByHomeId = async (req, res) => {
   try {
     const servants = await Servants.find({ home: req.body.homeId })
-      .populate("home")
-      .populate("tasks")
-      .populate("unavailabillity");
+      .populate('home')
+      .populate('tasks')
+      .populate('unavailabillity');
     // Finding all the Homes from db
     res.json({ success: true, servants }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 /**
@@ -51,16 +48,13 @@ exports.getByHomeId = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const servantId = req.params.servantId; // Getting home id from URL parameter
-    const servant = await Servants.findById(servantId)
-      .populate("home")
-      .populate("tasks")
-      .populate("unavailabillity");
+    const servant = await Servants.findById(servantId).populate('home').populate('tasks').populate('unavailabillity');
     // Finding servant from db
     res.json({ success: true, servant }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
@@ -76,13 +70,16 @@ exports.update = async (req, res) => {
     if (req.file) {
       req.body.photo = req.file.path; // Creating a new property called photo in body object
     }
+    if (req.body.password) {
+      req.body.password = bcrypt.hashSync(req.body.password, parseInt(bcryptSalt));
+    }
     const servant = await Servants.findByIdAndUpdate(servantId, req.body, {
       new: true,
     }); // Updating the home
     res.json({ success: true, servant }); // Success
   } catch (err) {
     // Error handling
-    console.log("Error ----> ", err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.log('Error ----> ', err);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
