@@ -304,7 +304,6 @@ exports.updatePassword = async (req, res) => {
   try {
     const { email } = req.params;
     const { password } = req.body;
-    let userotp = await OTPs.findOne({ email });
     let staff = await Staff.findOne({ email: email });
     let homeAdmin = await Users.findOne({ email: email });
     req.body.password = bcrypt.hashSync(password, parseInt(bcryptSalt));
