@@ -238,11 +238,6 @@ exports.forgotHomeAdminPassword = async (req, res) => {
   try {
     let { email } = req.params;
 
-    let userotp = await OTPs.findOne({ email });
-
-    if (!userotp?.is_verified) {
-      return res.status(404).json({ success: false, message: 'Otp Not verified yet' });
-    }
     req.body.otp = Math.floor(100000 + Math.random() * 900000);
     req.body.is_verified = false;
     await sendOTP(email, req.body.otp);
@@ -271,11 +266,6 @@ exports.forgotStaffPassword = async (req, res) => {
   try {
     let { email } = req.params;
 
-    let userotp = await OTPs.findOne({ email });
-
-    if (!userotp?.is_verified) {
-      return res.status(404).json({ success: false, message: 'Otp Not verified yet' });
-    }
     req.body.otp = Math.floor(100000 + Math.random() * 900000);
     req.body.is_verified = false;
     await sendOTP(email, req.body.otp);
